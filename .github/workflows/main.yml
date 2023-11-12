@@ -44,4 +44,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages  # GitHub Pages 的分支
-          folder: dist     # 生成的静态文件所在目录
+          folder: .     # 生成的静态文件所在目录
