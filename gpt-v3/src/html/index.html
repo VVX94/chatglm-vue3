@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能聊天</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+        nav {
+            background-color: #414141;
+            color: #ffffff;
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+        .avatar {
+            border-radius: 50%; /* 实现圆形头像 */
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-name {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        nav {
+            background-color: rgba(52, 56, 68);
+            color: #ffffff;
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #36c3ff;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        .selectable-row {
+            cursor: pointer;
+            transition: background-color 0.3s;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .selectable-row:hover {
+            background-color: rgba(98, 96, 109);
+        }
+        .row-image {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            width: 18px;
+        }
+        .row-image-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            background: rgba(240, 240, 240);
+            margin-left: 220px;
+            padding: 20px;
+            min-height: calc(100vh - 110px);
+        }
+        .container {
+            width: 850px;
+        }
+        .message-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .robot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .robot-bubble {
+            background-color: rgba(249, 249, 249);
+            padding: 10px;
+            border-radius: 10px;
+            width: 780px;
+            word-wrap: break-word;
+        }
+        .user-bubble {
+            background-color: rgba(226, 226, 226);
+            padding: 10px;
+            border-radius: 10px;
+            width: 780px;
+            word-wrap: break-word;
+        }
+        .user-bubble {
+            margin-left: 0;
+        }
+        .input-container {
+            display: flex;
+            align-items: flex-end;
+            margin-top: 20px;
+            position: relative;
+            justify-content: end;
+        }
+        .send-button {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: #00aaff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .input-box {
+            width: 790px;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            resize: none;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            outline: 2px solid #ecf9ff;
+        }
+        .count {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        /* 滚动条整体样式 */
+        .count::-webkit-scrollbar {
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+
+        /* 滚动条滑块样式 */
+        .count::-webkit-scrollbar-thumb {
+            background-color: #dadada;
+            border-radius: 4px;
+        }
+
+        /* 滚动条滑块悬停样式 */
+        .count::-webkit-scrollbar-thumb:hover {
+            background-color: #dcdcdc;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="user-info">
+        <img class="avatar" src="https://foruda.gitee.com/avatar/1677079600835137184/7470255_svipdada_1642667584.png" alt="用户头像" width="40" height="40" />
+        <span class="user-name">哒哒开发</span>
+    </div>
+</header>
+
+<nav>
+    <div>
+        <div class="logo">
+            <img src="img/food2.png" alt="Logo" width="80" height="75" />
+        </div>
+        <div class="title">
+            柑橘智能问答
+        </div>
+        <div class="button">
+            + 新建对话
+        </div>
+        <div class="selectable-row">
+            <div class="row-content">
+                <img src="img/say.png" alt="image1" class="row-image" />
+                <span class="row-text">柑橘的品种有哪些?</span>
+                <img src="img/edit.png" alt="image2" class="row-image row-image-right" />
+                <img src="img/del.png" alt="image2" class="row-image row-image-right" />
+            </div>
+        </div>
+        <div class="selectable-row">
+            <div class="row-content">
+                <img src="img/say.png" alt="image1" class="row-image" />
+                <span class="row-text">如何预防柑橘虫害?</span>
+                <img src="img/edit.png" alt="image2" class="row-image row-image-right" />
+                <img src="img/del.png" alt="image2" class="row-image row-image-right" />
+            </div>
+        </div>
+
+    </div>
+
+</nav>
+
+<main>
+    <div class="container">
+        <div class="count">
+            <div class="message-container">
+                <img src="img/user.png" alt="User Avatar" class="user-avatar">
+                <div class="user-bubble">
+                    柑橘的品种有哪些？
+                </div>
+            </div>
+            <div class="message-container">
+                <img src="img/rboot.png" alt="Robot Avatar" class="robot-avatar">
+                <div class="robot-bubble">
+                    柑橘有很多品种，其中包括橙类、柚类、积类、枸惨类、金橘类、大翼橙类、宜昌橙类和宽皮柑橘类等8个种群。这些品种的夕
+                    形相似，但口感和用途有所不同。例如，橙子和柚子都是柑橘类水果，但它们的口感和用途不同。
+                </div>
+            </div>
+            <div class="message-container">
+                <img src="img/user.png" alt="User Avatar" class="user-avatar">
+                <div class="user-bubble">
+                    柑橘的品种有哪些？
+                </div>
+            </div>
+            <div class="message-container">
+                <img src="img/rboot.png" alt="Robot Avatar" class="robot-avatar">
+                <div class="robot-bubble">
+                    柑橘有很多品种，其中包括橙类、柚类、积类、枸惨类、金橘类、大翼橙类、宜昌橙类和宽皮柑橘类等8个种群。这些品种的夕
+                    形相似，但口感和用途有所不同。例如，橙子和柚子都是柑橘类水果，但它们的口感和用途不同。
+                </div>
+            </div>
+            <div class="message-container">
+                <img src="img/user.png" alt="User Avatar" class="user-avatar">
+                <div class="user-bubble">
+                    橙类有哪些?
+                </div>
+            </div>
+            <div class="message-container">
+                <img src="img/rboot.png" alt="Robot Avatar" class="robot-avatar">
+                <div class="robot-bubble">
+                    柑;江西的赣南脐橙，湖北归的伦晚脐橙、中华红橙，湖南黔阳的冰糖橙，广东湛江的红橙等
+                    且体来说，甜橙果实为圆球形，扁圆形或椭圆形，颜色为橙黄至红色，里皮难或稍易剥离，副9-12，里心实或半充实里
+                    肉颜色为淡黄、橙红或紫红色，味或档偏酸。脐攒的果实顶部有圆锥状副果，特征为果顶有脐，即有一个发育不全的小果实包
+                    理干里实师部，无核，肉略嫩，味沈甜略酸，血格则以其独特的色深和浓郁的香味而受到人们的壹受，冰糖的名字来源干其粗
+                    度极高，如同冰糖一般。红橙果实较大，颜色鲜艳，是一种常见的水果。
+                    各种品种的橙子不仅口感不同，营养价值也有所差异。例如，胶合有大量维牛素C和胡萝卜素，有助于抑制致癌物质的形成
+                    还能软化和保护血管，促进血液循环，有助于降低胆固醇和血脂，降低患心脏病的可能，预防胆囊疾病。无论是哪一种橙子，都
+                    是非常健康美味的水果。
+                </div>
+            </div>
+        </div>
+        <div class="input-container">
+            <textarea class="input-box" placeholder="在此输入您想了解的内容，shift+Enter换行" onkeydown="handleKeydown(event)"></textarea>
+            <button class="send-button" onclick="send()">发送</button>
+        </div>
+    </div>
+</main>
+<script>
+    function handleKeydown(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // 阻止默认行为（即在文本框中换行）
+            send(); // 调用发送消息的函数
+        }
+    }
+    function send() {
+        // 找到输入框元素并获取其中的文本内容
+        const inputBox = document.querySelector('.input-box');
+        const userInput = inputBox.value.trim();
+
+        // 创建新的消息容器并设置其内容为用户输入的文本
+        const newMessageContainer = document.createElement('div');
+        newMessageContainer.classList.add('message-container');
+        newMessageContainer.innerHTML = `
+    <img src="img/user.png" alt="User Avatar" class="user-avatar">
+    <div class="user-bubble">${userInput}</div>
+  `;
+
+        // 找到容器元素并将新创建的消息容器添加到其中
+        const container = document.querySelector('.count');
+        container.appendChild(newMessageContainer);
+
+        // 清空输入框
+        inputBox.value = '';
+        // 将滚动条滚动到底部
+        var count = document.querySelector('.count');
+        container.scrollTop = container.scrollHeight;
+    }
+
+</script>
+</body>
+</html>
