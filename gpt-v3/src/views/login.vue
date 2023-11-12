@@ -85,7 +85,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       }, 1500)
       load.value = true
         const options = {
-          url:'http://127.0.0.1:8000/api/user/token/get/',
+          url:'https://glmapi.gaozih.top/api/user/token/get/',
           data:{username:ruleForm.username,password:ruleForm.password},
           method: 'post',
           headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}
