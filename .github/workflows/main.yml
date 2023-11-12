@@ -5,6 +5,10 @@ on:
     branches:
       - master_online  # 指定分支
   workflow_dispatch:  # 允许手动触发
+  
+permissions:
+  contents: write
+  pages: write
 
 jobs:
   build-and-deploy:
@@ -13,15 +17,15 @@ jobs:
     steps:
       # Checkout 代码
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: master_online  # 指定分支
 
       # 安装 Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       # 安装项目依赖
       - name: Install dependencies
