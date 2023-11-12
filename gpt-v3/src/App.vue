@@ -10,7 +10,7 @@ const dateTimer = () => {
     const requestBody = {
       refresh: refreshToken,
     };
-    axios.post('http://127.0.0.1:8000/api/user/token/refresh/', requestBody)
+    axios.post('https://glmapi.gaozih.top/api/user/token/refresh/', requestBody)
         .then(response => {
           console.log('令牌刷新成功', response);
           // requestBody.refresh=response.data.refresh;
@@ -20,7 +20,7 @@ const dateTimer = () => {
         .catch(error => {
           console.error('令牌刷新失败', error);
         });
-  },  60*1000);   //3分钟
+  },  1*60*1000);   //1分钟
 }
 onMounted(()=>{
   dateTimer()

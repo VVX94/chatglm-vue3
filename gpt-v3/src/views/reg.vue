@@ -26,6 +26,18 @@
           </template>
         </el-input>
       </el-form-item>
+      <el-form-item  prop="invite_code">
+        <el-input
+            type="password"
+            clearable
+            placeholder="邀请码"
+            v-model="ruleForm.inviteCode"
+            class="input-with-select">
+          <template #prefix>
+            <el-icon><Lock /></el-icon>
+          </template>
+        </el-input>
+      </el-form-item>
 
 
       <router-link to='/' style="  text-decoration: none;padding: 10px;color:#4e89ff;font-size: 15px">
@@ -58,6 +70,7 @@ const image = ref('');
 const ruleForm = reactive({
   username:'',
   password:'',
+  inviteCode:''
 })
 
 
@@ -89,11 +102,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
       // 构建请求体
       const requestBody = {
         username: ruleForm.username,
-        password: ruleForm.password
+        password: ruleForm.password,
+        invite_code:ruleForm.inviteCode
       };
 
       // 发送请求
-      axios.post('http://127.0.0.1:8000/api/user/register/', requestBody)
+      axios.post('https://glmapi.gaozih.top/api/user/register/', requestBody)
           .then(response => {
             // 注册成功，处理返回的响应结果
             console.log(response.data);

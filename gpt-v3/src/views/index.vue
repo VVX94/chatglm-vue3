@@ -129,7 +129,7 @@ const addData = () => {
       messages.value[title.value] = [newMessage];
     }
     const options = {
-      url:'http://127.0.0.1:8000/api/archive/create/',
+      url:'https://glmapi.gaozih.top/api/archive/create/',
       data:{body: title.value},
       method: 'post',
       headers : {
@@ -167,7 +167,7 @@ const addData = () => {
 
 const delMsg = (chatTitle) => {
   const chatId =messages.value[chatTitle].id;
-  axios.delete(`http://127.0.0.1:8000/api/archive/delete/${chatId}`,{headers})
+  axios.delete(`https://glmapi.gaozih.top/api/archive/delete/${chatId}`,{headers})
       .then(response => {
         console.log('删除成功', response);
       })
@@ -192,7 +192,7 @@ const getList = () => {
     loading.close()
   }, 1500)
   // 发送请求
-  axios.get('http://127.0.0.1:8000/api/archive/list/',{headers})
+  axios.get('https://glmapi.gaozih.top/api/archive/list/',{headers})
       .then(response => {
         // 获取生成记录列表成功，处理返回的响应结果
         const chatList =document.getElementById('chatList');
@@ -215,7 +215,7 @@ const getList = () => {
             messages.value[chatItem.chatBody] = [newMessage];
           }
           messages.value[chatItem.chatBody].id =chatItem.chatId;
-          axios.get('http://127.0.0.1:8000/api/archive/detail/' + chatItem.chatId,{headers})
+          axios.get('https://glmapi.gaozih.top/api/archive/detail/' + chatItem.chatId,{headers})
               .then(response => {
                 // 获取生成记录列表成功，处理返回的响应结果
                 const rotMessage={
@@ -251,7 +251,7 @@ const getList = () => {
 }
 const getData = (data) => {
   messagesData.value = messages.value[data]
-  // axios.get('http://127.0.0.1:8000/api/archive/detail/' + data,{headers})
+  // axios.get('https://glmapi.gaozih.top/api/archive/detail/' + data,{headers})
   //     .then(response => {
   //       // 获取生成记录列表成功，处理返回的响应结果
   //       console.log(response.data);
@@ -286,7 +286,7 @@ const sendMessage = () =>  {
 
 const getUserInfo = () => {
 // 发送请求
-  axios.get('http://127.0.0.1:8000/api/user/info/',{headers})
+  axios.get('https://glmapi.gaozih.top/api/user/info/',{headers})
       .then(response => {
         // 获取用户信息成功，处理返回的响应结果
         console.log(response.data);
