@@ -25,11 +25,15 @@ jobs:
 
       # 安装项目依赖
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd gpt-v3
+          npm install
 
       # 构建项目
       - name: Build project
-        run: npm run build
+        run:  |
+          cd gpt-v3
+          npm run build
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
