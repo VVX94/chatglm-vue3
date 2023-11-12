@@ -40,8 +40,11 @@
         <div class="count" id="message-container">
           <div v-for="(message, index) in messagesData" :key="index" class="message-container ">
             <img :src="message.avatar" :alt="message.alt" class="user-avatar">
-            <div :class="message.bubbleClass">
+            <div v-if="message.type==='text'" :class="message.bubbleClass">
               {{ message.content }}
+            </div>
+            <div v-else-if="message.type === 'image'" :class="message.bubbleClass" >
+              <img :src="message.content" alt="图片" style="max-height: 500px;max-width: 750px">
             </div>
           </div>
         </div>
@@ -79,6 +82,7 @@
 import {nextTick, onMounted, ref} from "vue";
 import {ElLoading, ElMessage} from 'element-plus'
 import axios from  "axios"
+import {Base64} from "js-base64";
 const dialogVisible = ref(false)
 const countMsg = ref('');
 const title = ref('');
@@ -111,17 +115,18 @@ const handleOpen = (flag) => {
   }
 }
 const addData = () => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '拼命加载中...',
-    background: 'rgba(0, 0, 0, 0.7)',
-  })
+  // const loading = ElLoading.service({
+  //   lock: true,
+  //   text: '拼命加载中...',
+  //   background: 'rgba(0, 0, 0, 0.7)',
+  // })
   if (say.value==='新建对话') {
     const newMessage = {
       avatar: "src/assets/img/user.png",
       alt: "User Avatar",
       bubbleClass: "user-bubble",
-      content:title.value
+      content:title.value,
+      type:'text'
     };
     if (messages.value.hasOwnProperty(title.value)) {
       messages.value[title.value].push(newMessage);
@@ -143,9 +148,16 @@ const addData = () => {
         avatar: "src/assets/img/rboot.png",
         alt: "User Avatar",
         bubbleClass: "user-bubble",
-        content:response.data.res
+        // content:response.data.res,
+        content:response.data.res,
+        type:'image',
       };
-      loading.close()
+      rotMessage.content='data:image/png;base64, '+response.data.res
+      if(response.data.res.indexOf('data:')!=-1 && response.data.res.indexOf('base64')!=-1 ){
+        rotMessage.type='image';
+        // console.log('base64检测已执行')
+      }
+      // loading.close()
 
       messages.value[title.value].push(rotMessage);
       console.log('创建成功', messages.value);
@@ -207,7 +219,8 @@ const getList = () => {
             avatar: "src/assets/img/user.png",
             alt: "User Avatar",
             bubbleClass: "user-bubble",
-            content:chatItem.chatBody
+            content:chatItem.chatBody,
+            type:'text'
           }
           if (messages.value.hasOwnProperty(title.value)) {
             messages.value[chatItem.chatBody].push(newMessage);
@@ -222,7 +235,13 @@ const getList = () => {
                   avatar: "src/assets/img/rboot.png",
                   alt: "User Avatar",
                   bubbleClass: "user-bubble",
-                  content:response.data.res
+                  content:response.data.res,
+                  type:'image'
+                }
+                rotMessage.content='data:image/png;base64, '+response.data.res
+                if(response.data.res.indexOf('data:')!=-1 && response.data.res.indexOf('base64')!=-1 ){
+                  rotMessage.type='image';
+                  // console.log('base64检测已执行')
                 }
                 messages.value[chatItem.chatBody].push(rotMessage);
                 console.log(response.data);
@@ -276,7 +295,8 @@ const sendMessage = () =>  {
     avatar: "src/assets/img/user.png",
     alt: "User Avatar",
     bubbleClass: "user-bubble",
-    content: countMsg.value
+    content: countMsg.value,
+    type:'text'
   });
   countMsg.value = ''; // 清空输入框
   nextTick(()=>{
@@ -306,6 +326,7 @@ onMounted(()=>{
   console.log('INdex.VUe----->取值access：',access)
   console.log('INdex.VUe----->取值refresh：',refresh)
 })
+
 function scrollToBottom() {
   const messageContainer = document.querySelector('#message-container');
   messageContainer.scrollTop = messageContainer.scrollHeight;
