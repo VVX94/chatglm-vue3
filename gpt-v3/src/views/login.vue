@@ -55,8 +55,8 @@ const load = ref(false);
 const image = ref('');
 //表单属性值
 const ruleForm = reactive({
-  username:'admin123',
-  password:'admin12345',
+  username:'',
+  password:'',
 })
 
 
