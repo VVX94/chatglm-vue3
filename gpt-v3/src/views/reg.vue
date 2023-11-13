@@ -103,7 +103,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       const requestBody = {
         username: ruleForm.username,
         password: ruleForm.password,
-        // invite_code:ruleForm.inviteCode
+        invite_code:ruleForm.inviteCode
       };
 
       // 发送请求
