@@ -40,13 +40,13 @@
         <div class="count" id="message-container">
           <div v-for="(message, index) in messagesData" :key="index" class="message-container ">
             <div v-if ="message.avatar==='src/assets/img/user.png'">
-            <img src="@/assets/img/user.png" alt="User" class="user-avatar">
+            <img src="../assets/img/user.png" alt="User" class="user-avatar">
             <div  :class="message.bubbleClass">
               {{ message.content }}
             </div>
             </div>
             <div v-else-if ="message.avatar==='src/assets/img/rboot.png'">
-              <img src="@/assets/img/rboot.png" alt="Robot" class="user-avatar">
+              <img src="../assets/img/rboot.png" alt="Robot" class="robot-avatar">
               <div :class="message.bubbleClass" >
                 <img :src="message.content" alt="图片" style="max-height: 500px;max-width: 750px">
               </div>
@@ -296,13 +296,13 @@ const sendMessage = () =>  {
   setTimeout(() => {
     loading.close()
   }, 1500)
-  messagesData.value.push({
-    avatar: "src/assets/img/user.png",
-    alt: "User Avatar",
-    bubbleClass: "user-bubble",
-    content: countMsg.value,
-    type:'text'
-  });
+  // messagesData.value.push({
+  //   avatar: "src/assets/img/user.png",
+  //   alt: "User Avatar",
+  //   bubbleClass: "user-bubble",
+  //   content: countMsg.value,
+  //   type:'text'
+  // });
   countMsg.value = ''; // 清空输入框
   nextTick(()=>{
     scrollToBottom();
