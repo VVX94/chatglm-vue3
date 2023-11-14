@@ -186,7 +186,7 @@ const delMsg = (chatTitle) => {
   const chatId =messages.value[chatTitle].id;
   axios.delete(`https://glmapi.gaozih.top/api/archive/delete/${chatId}`,{headers})
       .then(response => {
-        console.log('删除成功', response);
+        // console.log('删除成功', response);
       })
       .catch(error => {
         console.error('删除失败', error);
@@ -249,7 +249,7 @@ const getList = () => {
                   // console.log('base64检测已执行')
                 }
                 messages.value[chatItem.chatBody].push(rotMessage);
-                console.log(response.data);
+                // console.log(response.data);
                 // 进行其他操作
               })
               .catch(error => {
@@ -258,11 +258,11 @@ const getList = () => {
                 // 进行其他操作
               });
 
-          console.log('创建成功', messages.value);
-          console.log(chatItem);
+          // console.log('创建成功', messages.value);
+          // console.log(chatItem);
 
         })
-        console.log(response.data);
+        // console.log(response.data);
         // 进行其他操作
       })
       .catch(error => {

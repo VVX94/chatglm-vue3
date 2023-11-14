@@ -110,7 +110,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       axios.post('https://glmapi.gaozih.top/api/user/register/', requestBody)
           .then(response => {
             // 注册成功，处理返回的响应结果
-            console.log(response.data);
+            // console.log(response.data);
             ElMessage({
               message:'注册成功！',
               type:'success'
