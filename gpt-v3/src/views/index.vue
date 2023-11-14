@@ -47,14 +47,12 @@
             </div>
             <div v-else-if ="message.avatar==='src/assets/img/rboot.png'">
               <img src="../assets/img/rboot.png" alt="Robot" class="robot-avatar">
-
               <div :class="message.bubbleClass" >
                 <img :src="message.content" alt="图片" style="max-height: 500px;max-width: 750px">
               </div>
             </div>
           </div>
         </div>
-
 <!--        <div class="input-container">-->
 <!--          <textarea class="input-box" placeholder="在此输入您想了解的内容，shift+Enter换行" v-model="countMsg" @keydown.enter.prevent="handleEnterKey"></textarea>-->
 <!--          <button class="send-button" @click="sendMessage">发送</button>-->
