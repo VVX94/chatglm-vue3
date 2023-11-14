@@ -16,7 +16,7 @@ app.use(router)
 app.use(createPinia())
 app.use(ElementPlus, {locale:zhCN})
 app.mount("#app")
-const Base64 = require('js-base64').Base64;
+// const Base64 = require('js-base64').Base64;
 
 
 
