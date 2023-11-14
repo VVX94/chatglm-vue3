@@ -39,12 +39,17 @@
       <div class="container">
         <div class="count" id="message-container">
           <div v-for="(message, index) in messagesData" :key="index" class="message-container ">
-            <img :src="message.avatar" :alt="message.alt" class="user-avatar">
-            <div v-if="message.type==='text'" :class="message.bubbleClass">
+            <div v-if ="message.avatar==='src/assets/img/user.png'">
+            <img src="@/assets/img/user.png" alt="User" class="user-avatar">
+            <div  :class="message.bubbleClass">
               {{ message.content }}
             </div>
-            <div v-else-if="message.type === 'image'" :class="message.bubbleClass" >
-              <img :src="message.content" alt="图片" style="max-height: 500px;max-width: 750px">
+            </div>
+            <div v-else-if ="message.avatar==='src/assets/img/rboot.png'">
+              <img src="@/assets/img/rboot.png" alt="Robot" class="user-avatar">
+              <div :class="message.bubbleClass" >
+                <img :src="message.content" alt="图片" style="max-height: 500px;max-width: 750px">
+              </div>
             </div>
           </div>
         </div>
@@ -309,7 +314,7 @@ const getUserInfo = () => {
   axios.get('https://glmapi.gaozih.top/api/user/info/',{headers})
       .then(response => {
         // 获取用户信息成功，处理返回的响应结果
-        console.log(response.data);
+        // console.log(response.data);
         // 进行其他操作
       })
       .catch(error => {
@@ -323,8 +328,8 @@ onMounted(()=>{
   getList()
   let access = localStorage.getItem('access')
   let refresh = localStorage.getItem('refresh')
-  console.log('INdex.VUe----->取值access：',access)
-  console.log('INdex.VUe----->取值refresh：',refresh)
+  // console.log('INdex.VUe----->取值access：',access)
+  // console.log('INdex.VUe----->取值refresh：',refresh)
 })
 
 function scrollToBottom() {
