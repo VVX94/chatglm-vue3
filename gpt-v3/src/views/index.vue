@@ -13,7 +13,7 @@
           <img  class="avatar" src="../assets/img/GLM.png" alt="Logo" width="80" height="75" />
         </div>
         <div class="title">
-          智能问答
+          智能绘画
         </div>
         <div class="button" @click="handleOpen('add')">
           + 新建对话
@@ -48,10 +48,10 @@
             </div>
           </div>
         </div>
-        <div class="input-container">
-          <textarea class="input-box" placeholder="在此输入您想了解的内容，shift+Enter换行" v-model="countMsg" @keydown.enter.prevent="handleEnterKey"></textarea>
-          <button class="send-button" @click="sendMessage">发送</button>
-        </div>
+<!--        <div class="input-container">-->
+<!--          <textarea class="input-box" placeholder="在此输入您想了解的内容，shift+Enter换行" v-model="countMsg" @keydown.enter.prevent="handleEnterKey"></textarea>-->
+<!--          <button class="send-button" @click="sendMessage">发送</button>-->
+<!--        </div>-->
       </div>
     </main>
   </div>
@@ -115,11 +115,11 @@ const handleOpen = (flag) => {
   }
 }
 const addData = () => {
-  // const loading = ElLoading.service({
-  //   lock: true,
-  //   text: '拼命加载中...',
-  //   background: 'rgba(0, 0, 0, 0.7)',
-  // })
+  const loading = ElLoading.service({
+    lock: true,
+    text: '拼命加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
   if (say.value==='新建对话') {
     const newMessage = {
       avatar: "src/assets/img/user.png",
@@ -152,12 +152,12 @@ const addData = () => {
         content:response.data.res,
         type:'image',
       };
-      rotMessage.content='data:image/png;base64, '+response.data.res
+      rotMessage.content='data:image/jpg;base64, '+response.data.res
       if(response.data.res.indexOf('data:')!=-1 && response.data.res.indexOf('base64')!=-1 ){
         rotMessage.type='image';
         // console.log('base64检测已执行')
       }
-      // loading.close()
+       loading.close()
 
       messages.value[title.value].push(rotMessage);
       console.log('创建成功', messages.value);
@@ -238,7 +238,7 @@ const getList = () => {
                   content:response.data.res,
                   type:'image'
                 }
-                rotMessage.content='data:image/png;base64, '+response.data.res
+                rotMessage.content='data:image/jpg;base64, '+response.data.res
                 if(response.data.res.indexOf('data:')!=-1 && response.data.res.indexOf('base64')!=-1 ){
                   rotMessage.type='image';
                   // console.log('base64检测已执行')

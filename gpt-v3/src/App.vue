@@ -25,7 +25,7 @@ const dateTimer = () => {
         .catch(error => {
           console.error('令牌刷新失败', error);
         });
-  },  60*1000);   //2分钟
+  },  60*1000);   //1分钟
 }
 onMounted(()=>{
   dateTimer()
