@@ -1,0 +1,47 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master_online  # 指定分支
+  workflow_dispatch:  # 允许手动触发
+  
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout 代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: master_online  # 指定分支
+
+      # 安装 Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 安装项目依赖
+      - name: Install dependencies
+        run: |
+          cd gpt-v3
+          npm install
+
+      # 构建项目
+      - name: Build project
+        run:  |
+          cd gpt-v3
+          npm run build
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages  # GitHub Pages 的分支
+          folder: gpt-v3/dist     # 生成的静态文件所在目录
